@@ -6,6 +6,7 @@ namespace BenefitsManagementAPI.DataModels
 {
     public class Dependent
     {
+        public Dependent() {}
         public Dependent(DependentDto dependentDto)
         {
             FirstName = dependentDto.FirstName;

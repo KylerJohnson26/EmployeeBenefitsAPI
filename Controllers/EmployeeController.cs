@@ -31,6 +31,14 @@ namespace BenefitsManagementAPI.Controllers
             return Ok(employee);
         }
 
+        [HttpGet("active")]
+        public async Task<IActionResult> GetAction()
+        {
+            var employees = await _employeeRepo.GetActiveEmployees();
+            
+            return Ok(employees);
+        }
+
         // GET /api/employee/1
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id) 

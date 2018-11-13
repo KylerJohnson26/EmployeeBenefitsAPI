@@ -7,6 +7,6 @@ namespace BenefitsManagementAPI.Repositories
     {
          Task AddNewDependent(Dependent dependent);
          Task RemoveDependent(int dependentId);
-         Task UpdateDependent(Dependent editedDependent);
+         Task EditDependent(Dependent editedDependent);
     }
 }

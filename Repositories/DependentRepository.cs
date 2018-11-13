@@ -26,14 +26,9 @@ namespace BenefitsManagementAPI.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateDependent(Dependent editedDependent)
+        public async Task EditDependent(Dependent editedDependent)
         {
-            var dependent = await _context.Dependents.SingleOrDefaultAsync(x => x.Id == editedDependent.Id);
-            
-            if(dependent != null)
-                dependent = editedDependent;
-
-            _context.Dependents.Update(dependent);
+            _context.Dependents.Update(editedDependent);
             await _context.SaveChangesAsync();
         }
     }

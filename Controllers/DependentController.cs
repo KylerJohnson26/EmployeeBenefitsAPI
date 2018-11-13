@@ -35,17 +35,16 @@ namespace BenefitsManagementAPI.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            var editedDependent = new Dependent(dependent);
-            await _dependentRepo.UpdateDependent(editedDependent);
+            await _dependentRepo.EditDependent(dependent);
 
-            return Ok(editedDependent);
+            return Ok(dependent);
         }
 
         // POST /api/dependent/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int dependentId)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _dependentRepo.RemoveDependent(dependentId);
+            await _dependentRepo.RemoveDependent(id);
             
             return Ok();
         }

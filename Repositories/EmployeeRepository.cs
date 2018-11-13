@@ -15,13 +15,15 @@ namespace BenefitsManagementAPI.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Employee> GetActiveEmployees()
+        public async Task<List<Employee>> GetActiveEmployees()
         {
-            return _context.Employees.Where(x => x.IsActive == true);
+            return await _context.Employees.Where(x => x.IsActive == true)
+                .Include(employee => employee.Dependents).ToListAsync();
         }
         public async Task<Employee> GetEmployeeById(int employeeId)
         {
-            return await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeId == employeeId);
+            return await _context.Employees.Where(x => x.EmployeeId == employeeId)
+                .Include(employee => employee.Dependents).SingleOrDefaultAsync();
         }
 
         public async Task AddNewEmployee(Employee employee)

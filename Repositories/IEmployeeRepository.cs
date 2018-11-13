@@ -6,7 +6,7 @@ namespace BenefitsManagementAPI.Repositories
 {
     public interface IEmployeeRepository
     {
-        IEnumerable<Employee> GetActiveEmployees();
+        Task<List<Employee>> GetActiveEmployees();
         Task<Employee> GetEmployeeById(int employeeId);
         Task AddNewEmployee(Employee employee);
         Task EditEmployee(Employee editedEmployee);

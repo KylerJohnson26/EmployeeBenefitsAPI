@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace BenefitsManagementAPI
 {
@@ -32,7 +33,9 @@ namespace BenefitsManagementAPI
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDependentRepository, DependentRepository>();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
