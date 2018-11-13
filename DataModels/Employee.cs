@@ -7,6 +7,7 @@ namespace BenefitsManagementAPI.DataModels
 {
     public class Employee
     {
+        public Employee() {}
         public Employee(EmployeeDto employeeDto)
         {
             FirstName = employeeDto.FirstName;

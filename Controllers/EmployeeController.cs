@@ -55,23 +55,29 @@ namespace BenefitsManagementAPI.Controllers
             return Ok(editedEmployee);
         }
 
-        // PUT /api/employee/deactivate
-        [HttpGet]
-        public async Task<IActionResult> Deactivate(int employeeId)
+        // GET /api/employee/deactivate/1
+        [HttpGet("deactivate/{id}")]
+        public async Task<IActionResult> Deactivate(int id)
         {
-            if(!ModelState.IsValid)
-                return BadRequest(ModelState);
-            
-            await _employeeRepo.DeactivateEmployee(employeeId);
+            var employee = await _employeeRepo.DeactivateEmployee(id);
 
-            return Ok();
+            return Ok(employee);
+        }
+
+        // GET /api/employee/activate/1
+        [HttpGet("activate/{id}")]
+        public async Task<IActionResult> Activate(int id)
+        {
+            var employee = await _employeeRepo.ActivateEmployee(id);
+
+            return Ok(employee);
         }
 
         // DELETE /api/employee/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int employeeId)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _employeeRepo.DeleteEmployee(employeeId);
+            await _employeeRepo.DeleteEmployee(id);
             
             return Ok();
         }

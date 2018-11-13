@@ -10,7 +10,8 @@ namespace BenefitsManagementAPI.Repositories
         Task<Employee> GetEmployeeById(int employeeId);
         Task AddNewEmployee(Employee employee);
         Task EditEmployee(Employee editedEmployee);
-        Task DeactivateEmployee(int employeeId);
+        Task<Employee> DeactivateEmployee(int employeeId);
+        Task<Employee> ActivateEmployee(int employeeId);
         Task DeleteEmployee(int employeeId);
     }
 }

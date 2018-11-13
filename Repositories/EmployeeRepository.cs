@@ -32,23 +32,26 @@ namespace BenefitsManagementAPI.Repositories
 
         public async Task EditEmployee(Employee editedEmployee)
         {
-            var employee = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeId == editedEmployee.EmployeeId);
-
-            if(employee != null)
-            {
-                employee = editedEmployee;
-            }
-
-            _context.Employees.Update(employee);
+            _context.Employees.Update(editedEmployee);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeactivateEmployee(int employeeId)
+        public async Task<Employee> DeactivateEmployee(int employeeId)
         {
             var employee = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeId == employeeId);
             employee.IsActive = false;
             _context.Employees.Update(employee);
             await _context.SaveChangesAsync();
+            return employee;
+        }
+
+        public async Task<Employee> ActivateEmployee(int employeeId)
+        {
+            var employee = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeId == employeeId);
+            employee.IsActive = true;
+            _context.Employees.Update(employee);
+            await _context.SaveChangesAsync();
+            return employee;
         }
 
         public async Task DeleteEmployee(int employeeId)
