@@ -2,7 +2,8 @@ namespace BenefitsManagementAPI.Helpers
 {
     public interface ISettingsHelper
     {
-         decimal GetDefaultPayPerPeriod();
-         int GetNumPayPeriodsPerYear();
+        string GetAuthKey();
+        decimal GetDefaultPayPerPeriod();
+        int GetNumPayPeriodsPerYear();
     }
 }

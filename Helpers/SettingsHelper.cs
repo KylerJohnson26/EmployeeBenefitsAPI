@@ -26,5 +26,10 @@ namespace BenefitsManagementAPI.Helpers
 
             return numPayPeriodsPerYear;
         }
+
+        public string GetAuthKey()
+        {
+            return _config.GetSection("AppSettings:AuthKey").Value;
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace BenefitsManagementAPI.Data
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Dependent> Dependents { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
