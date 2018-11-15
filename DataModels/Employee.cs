@@ -17,7 +17,7 @@ namespace BenefitsManagementAPI.DataModels
             IsActive = true;
             IsMale = employeeDto.IsMale;
             GrossPayPerPeriod = 2000.00m;
-            NumPayPeriodsPerYear = 26;
+            NumPayPeriodsPerYear = 26; 
         }
 
         public Employee(Employee employee) 
@@ -49,6 +49,9 @@ namespace BenefitsManagementAPI.DataModels
         public decimal GrossPayPerPeriod { get; set; }
         [Required]
         public int NumPayPeriodsPerYear { get; set; }
+        public decimal? AnnualCostOfBenefits { get; set; }
+        public decimal? CostOfBenefitsPerPayPeriod { get; set; }
+        public int? Discount { get; set; }
         public List<Dependent> Dependents { get; set; }
     }
 }

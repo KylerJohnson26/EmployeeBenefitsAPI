@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BenefitsManagementAPI.Data;
 using BenefitsManagementAPI.Helpers;
 using BenefitsManagementAPI.Repositories;
+using BenefitsManagementAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -36,10 +37,13 @@ namespace BenefitsManagementAPI
         {
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:AuthKey").Value);
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddSingleton<ISettingsHelper, SettingsHelper>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDependentRepository, DependentRepository>();
+            services.AddScoped<IBenefitsCalculatorService, BenefitsCalculatorService>();
+            
             services.AddCors();
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

@@ -31,5 +31,32 @@ namespace BenefitsManagementAPI.Helpers
         {
             return _config.GetSection("AppSettings:AuthKey").Value;
         }
+
+        public decimal GetDefaultBenefitsAnnualCost()
+        {
+            decimal defaultAnnualCost;
+            var defaultCost = _config.GetSection("EmployeeDefaults:AnnualCostOfBenefits").Value;
+            decimal.TryParse(defaultCost, out defaultAnnualCost);
+
+            return defaultAnnualCost;
+        }
+
+        public decimal GetAdditionalCostPerDependent()
+        {
+            decimal additionalCost;
+            var defaultCost = _config.GetSection("EmployeeDefaults:AdditionalCostPerDependent").Value;
+            decimal.TryParse(defaultCost, out additionalCost);
+
+            return additionalCost;
+        }
+
+        public int GetDiscountPercentage()
+        {
+            int percentage;
+            var defaultPercentage = _config.GetSection("EmployeeDefaults:BenefitDiscountPercentage").Value;
+            int.TryParse(defaultPercentage, out percentage);
+
+            return percentage;
+        }
     }
 }

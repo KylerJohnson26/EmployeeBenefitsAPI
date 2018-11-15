@@ -17,8 +17,7 @@ namespace BenefitsManagementAPI.Repositories
         }
         public async Task<List<Employee>> GetActiveEmployees()
         {
-            return await _context.Employees.Where(x => x.IsActive == true)
-                .Include(employee => employee.Dependents).ToListAsync();
+            return await _context.Employees.Where(x => x.IsActive == true).ToListAsync();
         }
         public async Task<Employee> GetEmployeeById(int employeeId)
         {

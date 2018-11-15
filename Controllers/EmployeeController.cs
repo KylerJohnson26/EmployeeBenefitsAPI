@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BenefitsManagementAPI.DataModels;
 using BenefitsManagementAPI.DTOs;
 using BenefitsManagementAPI.Repositories;
+using BenefitsManagementAPI.Services;
 using EmployeeBenefitsAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,11 @@ namespace BenefitsManagementAPI.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepo;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        private readonly IBenefitsCalculatorService _benfitsCalcService;
+        public EmployeeController(IEmployeeRepository employeeRepository, IBenefitsCalculatorService benefitsCalcService)
         {
             _employeeRepo = employeeRepository;
+            _benfitsCalcService = benefitsCalcService;
         }
 
         // POST /api/employee/
@@ -27,6 +30,10 @@ namespace BenefitsManagementAPI.Controllers
                 return BadRequest(ModelState);
             
             var employee = new Employee(employeeDto);
+            var calculatedBenefits = _benfitsCalcService.Calculate(employee);
+            employee.AnnualCostOfBenefits = calculatedBenefits.AnnualCostOfBenefits;
+            employee.CostOfBenefitsPerPayPeriod = calculatedBenefits.CostOfBenefitsPerPayPeriod;
+            employee.Discount = calculatedBenefits.DiscountPercentage;
             await _employeeRepo.AddNewEmployee(employee);
 
             return Ok(employee);
@@ -67,6 +74,10 @@ namespace BenefitsManagementAPI.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            var calculatedBenefits = _benfitsCalcService.Calculate(editedEmployee);
+            editedEmployee.AnnualCostOfBenefits = calculatedBenefits.AnnualCostOfBenefits;
+            editedEmployee.CostOfBenefitsPerPayPeriod = calculatedBenefits.CostOfBenefitsPerPayPeriod;
+            editedEmployee.Discount = calculatedBenefits.DiscountPercentage;
             await _employeeRepo.EditEmployee(editedEmployee);
 
             return Ok(editedEmployee);
