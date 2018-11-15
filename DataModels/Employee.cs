@@ -15,6 +15,7 @@ namespace BenefitsManagementAPI.DataModels
             DateOfBirth = employeeDto.DateOfBirth;
             DateCreated = DateTime.Now;
             IsActive = true;
+            IsMale = employeeDto.IsMale;
             GrossPayPerPeriod = 2000.00m;
             NumPayPeriodsPerYear = 26;
         }
@@ -26,6 +27,7 @@ namespace BenefitsManagementAPI.DataModels
             DateOfBirth = employee.DateOfBirth;
             DateCreated = employee.DateCreated;
             IsActive = employee.IsActive;
+            IsMale = employee.IsMale;
             GrossPayPerPeriod = employee.GrossPayPerPeriod;
             NumPayPeriodsPerYear = employee.NumPayPeriodsPerYear;
         }
@@ -41,6 +43,8 @@ namespace BenefitsManagementAPI.DataModels
         public DateTime DateCreated { get; set; }
         [Required]
         public bool IsActive { get; set; }
+        [Required]
+        public bool IsMale { get; set; }
         [Required]
         public decimal GrossPayPerPeriod { get; set; }
         [Required]

@@ -11,5 +11,7 @@ namespace BenefitsManagementAPI.DTOs
         public string LastName { get; set; }
         [Required]
         public DateTime DateOfBirth { get; set; }
+        [Required]
+        public bool IsMale { get; set; }
     }
 }

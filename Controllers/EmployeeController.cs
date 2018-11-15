@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BenefitsManagementAPI.DataModels;
 using BenefitsManagementAPI.DTOs;
 using BenefitsManagementAPI.Repositories;
+using EmployeeBenefitsAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BenefitsManagementAPI.Controllers
@@ -32,11 +33,19 @@ namespace BenefitsManagementAPI.Controllers
         }
 
         [HttpGet("active")]
-        public async Task<IActionResult> GetAction()
+        public async Task<IActionResult> GetActiveEmployees()
         {
             var employees = await _employeeRepo.GetActiveEmployees();
-            
-            return Ok(employees);
+
+            var dashboardEmployees = new List<DashboardEmployeeDto>();
+            foreach(var empl in employees)
+                dashboardEmployees.Add(new DashboardEmployeeDto(
+                    empl.EmployeeId,
+                    empl.FirstName,
+                    empl.LastName,
+                    empl.IsMale));
+
+            return Ok(dashboardEmployees);
         }
 
         // GET /api/employee/1
